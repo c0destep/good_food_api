@@ -7,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 /**
  * @package app
  */
@@ -27,7 +26,7 @@ use JetBrains\PhpStorm\Pure;
  *
  * @return array<int,string> A list of all loaded files
  */
-function helpers(array|string $helper): array
+function helpers(array|string $helper) : array
 {
     if (is_array($helper)) {
         $files = [];
@@ -52,12 +51,12 @@ function helpers(array|string $helper): array
  * @return string The escaped text
  */
 #[Pure]
-function esc(?string $text, string $encoding = 'UTF-8'): string
+function esc(?string $text, string $encoding = 'UTF-8') : string
 {
-    $text = (string)$text;
+    $text = (string) $text;
     return empty($text)
         ? $text
-        : htmlspecialchars($text, ENT_QUOTES | ENT_HTML5, $encoding);
+        : htmlspecialchars($text, \ENT_QUOTES | \ENT_HTML5, $encoding);
 }
 
 /**
@@ -69,7 +68,7 @@ function esc(?string $text, string $encoding = 'UTF-8'): string
  *
  * @return string The rendered view contents
  */
-function view(string $path, array $variables = [], string $instance = 'default'): string
+function view(string $path, array $variables = [], string $instance = 'default') : string
 {
     return App::view($instance)->render($path, $variables);
 }
@@ -79,7 +78,7 @@ function view(string $path, array $variables = [], string $instance = 'default')
  *
  * @return string
  */
-function current_url(): string
+function current_url() : string
 {
     return App::request()->getUrl()->toString();
 }
@@ -89,7 +88,7 @@ function current_url(): string
  *
  * @return Framework\Routing\Route
  */
-function current_route(): Route
+function current_route() : Route
 {
     return App::router()->getMatchedRoute();
 }
@@ -103,7 +102,7 @@ function current_route(): Route
  *
  * @return string The Route URL
  */
-function route_url(string $name, array $pathArgs = [], array $originArgs = []): string
+function route_url(string $name, array $pathArgs = [], array $originArgs = []) : string
 {
     $route = App::router()->getNamedRoute($name);
     $matched = App::router()->getMatchedRoute();
@@ -128,7 +127,7 @@ function route_url(string $name, array $pathArgs = [], array $originArgs = []): 
  *
  * @return string|null The rendered text or null if not found
  */
-function lang(string $line, array $args = [], string $locale = null): ?string
+function lang(string $line, array $args = [], string $locale = null) : ?string
 {
     return App::language()->lang($line, $args, $locale);
 }
@@ -138,7 +137,7 @@ function lang(string $line, array $args = [], string $locale = null): ?string
  *
  * @return Framework\Session\Session
  */
-function session(): Session
+function session() : Session
 {
     return App::session();
 }
@@ -151,18 +150,18 @@ function session(): Session
  *
  * @return mixed The old value. If $escape is true and the value is not
  * stringable, an empty string will return
+ *
  * @see Framework\HTTP\Response::redirect()
  * @see redirect()
- *
  * @see Framework\HTTP\Request::getRedirectData()
  */
-function old(?string $key, bool $escape = true): mixed
+function old(?string $key, bool $escape = true) : mixed
 {
     App::session()->activate();
     $data = App::request()->getRedirectData($key);
     if ($escape) {
         $data = is_scalar($data) || (is_object($data) && method_exists($data, '__toString'))
-            ? esc((string)$data)
+            ? esc((string) $data)
             : '';
     }
     return $data;
@@ -176,7 +175,7 @@ function old(?string $key, bool $escape = true): mixed
  * @return string An HTML hidden input if antiCsrf service is enabled or an
  * empty string if it is disabled
  */
-function csrf_input(string $instance = 'default'): string
+function csrf_input(string $instance = 'default') : string
 {
     return App::antiCsrf($instance)->input();
 }
@@ -187,10 +186,11 @@ function csrf_input(string $instance = 'default'): string
  *
  * @param array<string,mixed> $variables
  *
- * @return Framework\HTTP\Response
  * @throws JsonException
+ *
+ * @return Framework\HTTP\Response
  */
-function not_found(array $variables = []): Response
+function not_found(array $variables = []) : Response
 {
     $response = App::response();
     $response->setStatus(404);
@@ -219,15 +219,15 @@ function not_found(array $variables = []): Response
  * @param int|null $code HTTP Redirect status code. Leave null to determine
  * based on the current HTTP method.
  *
- * @return Framework\HTTP\Response
  * @throws InvalidArgumentException for invalid Redirection code
  *
- * @see old()
+ * @return Framework\HTTP\Response
  *
+ * @see old()
  * @see http://en.wikipedia.org/wiki/Post/Redirect/Get
  * @see Framework\HTTP\Request::getRedirectData()
  */
-function redirect(string $location, array $data = [], int $code = null): Response
+function redirect(string $location, array $data = [], int $code = null) : Response
 {
     if ($data) {
         App::session()->activate();
@@ -244,7 +244,7 @@ function redirect(string $location, array $data = [], int $code = null): Respons
  *
  * @return mixed The key value
  */
-function config(string $name, string $key = 'default'): mixed
+function config(string $name, string $key = 'default') : mixed
 {
     [$instance, $keys] = array_pad(explode('[', $key, 2), 2, null);
     $config = App::config()->get($name, $instance);

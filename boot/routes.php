@@ -7,10 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 use Framework\Routing\RouteCollection;
 
-App::router()->serve('http://localhost:8080', static function (RouteCollection $routes): void {
+App::router()->serve('http://localhost:8080', static function (RouteCollection $routes) : void {
     $routes->group('/api', [
         $routes->post('/login', 'App\AuthController::login', 'auth.login'),
         $routes->post('/register', 'App\AuthController::login', 'auth.register'),
@@ -20,9 +19,13 @@ App::router()->serve('http://localhost:8080', static function (RouteCollection $
         $routes->resource('/restaurants', 'App\Restaurants', 'restaurants'),
 
         $routes->group('/restaurants/{int}', [
-            $routes->resource('/products', 'App\Products', 'products')
-        ])
+            $routes->resource('/products', 'App\Products', 'products'),
+        ]),
     ]);
 
-    $routes->notFound(static fn() => not_found());
+    $routes->namespace('App\Controllers', [
+        $routes->get('/', 'Home::index', 'home'),
+    ]);
+
+    $routes->notFound(static fn () => not_found());
 });

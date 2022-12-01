@@ -1,0 +1,53 @@
+{
+    "commit-msg": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\Ramsey\\CaptainHook\\ValidateConventionalCommit"
+            }
+        ]
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "composer normalize --dry-run --indent-size=4 --indent-style=space",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "vendor/bin/php-cs-fixer fix -vvv",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "vendor/bin/phpmd app xml phpmd.xml",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "vendor/bin/phpstan analyse -vvv",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "vendor/bin/phpunit --verbose",
+                "options": [],
+                "conditions": []
+            }
+        ]
+    },
+    "prepare-commit-msg": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\Ramsey\\CaptainHook\\PrepareConventionalCommit"
+            }
+        ]
+    }
+}

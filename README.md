@@ -1,25 +1,32 @@
 # Good food API
 
-[![tests](https://github.com/aplus-framework/app/actions/workflows/tests.yml/badge.svg)](https://github.com/aplus-framework/app/actions/workflows/tests.yml)
+[![tests](https://github.com/aplus-framework/app/actions/workflows/tests.yml/badge.svg)](https://github.com/good_food_api/app/actions/workflows/tests.yml)
 
 ## Getting Started
 
 Make sure you have [Composer](https://getcomposer.org/doc/00-intro.md) installed.
 
-Follow the installation instructions in
-the [User Guide](https://docs.aplus-framework.com/guides/projects/app/index.html).
+Follow the installation instructions.
 
 To install the latest version:
 
 ```
-git clone 
+git clone git@github.com:c0destep/good_food_api.git
 ```
 
-To install the latest version:
+To install dependencies:
 
 ```
-composer install
+composer update
 ```
+
+Just run:
+
+```
+vendor/bin/php-server
+```
+
+and your project will be available at http://localhost:8080.
 
 **Remember**:
 
