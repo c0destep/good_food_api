@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branchs: [ main ]
+    branches: [ main ]
   pull_request:
-    branchs: [ main ]
+    branches: [ main ]
 
 jobs:
   tests:
@@ -52,7 +52,12 @@ jobs:
         run:
           vendor/bin/phpunit --verbose
 
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload coverage results to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p build/logs/
+          cp build/coverage/clover.xml build/logs/clover.xml
+          composer global require php-coveralls/php-coveralls
+          php-coveralls --coverage_clover=build/logs/clover.xml -v
+        if: matrix.php == '8.1'
