@@ -1,6 +1,6 @@
 # Good food API
 
-[![tests](https://github.com/aplus-framework/app/actions/workflows/tests.yml/badge.svg)](https://github.com/good_food_api/app/actions/workflows/tests.yml)
+[![tests](https://github.com/c0destep/good_food_api/actions/workflows/tests.yml/badge.svg)](https://github.com/c0destep/good_food_api/app/actions/workflows/tests.yml)
 
 ## Getting Started
 
