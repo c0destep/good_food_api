@@ -1,6 +1,6 @@
 # Good food API
 
-[![tests](https://github.com/c0destep/good_food_api/actions/workflows/tests.yml/badge.svg)](https://github.com/c0destep/good_food_api/app/actions/workflows/tests.yml)
+[![Coverage Status](https://coveralls.io/repos/github/c0destep/good_food_api/badge.svg?branch=main)](https://coveralls.io/github/c0destep/good_food_api?branch=main)
 
 ## Getting Started
 
