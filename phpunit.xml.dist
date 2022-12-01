@@ -15,8 +15,8 @@
             <file>public/index.php</file>
         </include>
         <report>
-            <clover outputFile="build/log/clover.xml"/>
-            <html outputDirectory="build/log"/>
+            <clover outputFile="build/logs/clover.xml"/>
+            <html outputDirectory="build/logs"/>
             <text outputFile="php://stdout"/>
         </report>
     </coverage>
