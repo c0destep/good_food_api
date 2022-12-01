@@ -14,11 +14,9 @@
             <file>boot/routes.php</file>
             <file>public/index.php</file>
         </include>
-        <report>
-            <clover outputFile="build/coverage/clover.xml"/>
-            <html outputDirectory="build/coverage"/>
-            <text outputFile="php://stdout"/>
-        </report>
+        <logging>
+            <log type="coverage-clover" target="build/logs/clover.xml"/>
+    	</logging>
     </coverage>
     <testsuite name="Tests">
         <directory suffix="Test.php">tests</directory>
