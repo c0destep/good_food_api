@@ -18,10 +18,10 @@ return [
     'default' => [
         'config' => [
             'username' => 'root',
-            'password' => 'password',
-            'schema' => 'framework-tests',
-            'host' => 'localhost',
+            'password' => '',
+            'schema' => 'good_food_api',
+            'host' => '127.0.0.1'
         ],
-        'logger_instance' => 'default',
-    ],
+        'logger_instance' => 'default'
+    ]
 ];

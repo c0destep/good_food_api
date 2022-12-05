@@ -7,19 +7,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+use App\Controllers\AuthenticationController;
+use App\Controllers\RestaurantController;
+use App\Controllers\UserController;
 use Framework\Routing\RouteCollection;
 
-App::router()->serve('http://localhost:8080', static function (RouteCollection $routes) : void {
+App::router()->serve('http://localhost:8080', static function (RouteCollection $routes): void {
     $routes->group('/api', [
-        $routes->post('/login', 'App\AuthController::login', 'auth.login'),
-        $routes->post('/register', 'App\AuthController::login', 'auth.register'),
+        $routes->post('/login', [AuthenticationController::class, 'login'], 'authentication.login'),
+        $routes->post('/register', [AuthenticationController::class, 'register'], 'authentication.register'),
 
-        $routes->resource('/users', 'App\Users', 'users'),
+        $routes->resource('/users', UserController::class, 'users'),
 
-        $routes->resource('/restaurants', 'App\Restaurants', 'restaurants'),
+        $routes->resource('/restaurants', RestaurantController::class, 'restaurants'),
 
         $routes->group('/restaurants/{int}', [
-            $routes->resource('/products', 'App\Products', 'products'),
+            $routes->resource('/products', RestaurantController::class, 'products'),
         ]),
     ]);
 
@@ -27,5 +31,5 @@ App::router()->serve('http://localhost:8080', static function (RouteCollection $
         $routes->get('/', 'Home::index', 'home'),
     ]);
 
-    $routes->notFound(static fn () => not_found());
+    $routes->notFound(static fn() => not_found());
 });
